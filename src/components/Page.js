@@ -5,10 +5,10 @@ import PhotoList from './PhotoList';
 import Navigation from './Navigation';
 import SearchForm from './SearchForm';
 
-const Page = ({title, pageName, getPhotos, changePageName, history, photos, fetchPhotos}) => {
+const Page = ({title, currentPage, getPhotos, changePageName, history, photos, fetchPhotos}) => {
 
-  if((title !== pageName) && title !== "Search") {
-    getPhotos(pageName, title);
+  if((title !== currentPage) && title !== "Search") {
+    getPhotos(currentPage, title);
     changePageName(title);
   }
 
@@ -18,7 +18,7 @@ const Page = ({title, pageName, getPhotos, changePageName, history, photos, fetc
       <Navigation/>
       <div className="photo-container">
         { title !== "Search" && <h2>{title}</h2>}
-        <PhotoList photos={photos} />
+        <PhotoList photos={photos}  />
       </div>
     </div>
   );

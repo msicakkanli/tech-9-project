@@ -6,7 +6,8 @@ const PhotoList = ({photos}) => {
 
   let photoItems = photos.map(photo => {
     const url = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`
-    return <PhotoItem url={url} />;
+    const key = photo.id
+    return <PhotoItem url={url} key={key}/>;
   });
 
   return(

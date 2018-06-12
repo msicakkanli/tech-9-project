@@ -3,25 +3,25 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import NotFound from './components/NotFound';
 import Page from './components/Page';
-import connectApi from './config/config'
 import './App.css';
+import connectApi from './config/config'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       photos: [],
-      pageName: ""
+      currentPage: ""
     }
   }
 
-  getPhotosForPage(pageName, title) {
+  getPhotosForPage(currentPage, title) {
     // reload when current page is different from the last page visited
-    if((pageName !== title) && title !== "Search") {
+    if((currentPage !== title) && title !== "Search") {
       if(title === "Home") {
         this.getRecentPhotos();
       } else {
-        this.performSearch(title); 
+        this.performSearch(title);
       }
     }
   }
@@ -49,13 +49,13 @@ class App extends Component {
       });
   }
 
-  changePageName(pageName) {
-      this.setState({pageName});
+  changePageName(currentPage) {
+      this.setState({currentPage});
   }
 
   render() {
     return (
-      <BrowserRouter basename="/react-flickr-gallery">
+      <BrowserRouter >
         <Switch>
           <Route exact path='/' render={ () => <Page title="Home" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
           <Route path='/cats' render={() => <Page title="Cats" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
