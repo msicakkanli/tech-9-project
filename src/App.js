@@ -51,6 +51,7 @@ class App extends Component {
 
   changePageName(currentPage) {
       this.setState({currentPage});
+      console.log("test");
   }
 
   render() {
